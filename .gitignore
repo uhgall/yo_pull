@@ -1,6 +1,8 @@
 # Recordings and edits
 *.mp4
 !3sperms.mp4
+*.gif
+!3sperms.gif
 *.mkv
 *.llc
 

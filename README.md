@@ -10,7 +10,20 @@ Useful for rapid at-home testing to try different collection or processing metho
 
 Three sperm visible in an ~8 s clip from the live feed:
 
-<video src="3sperms.mp4" controls width="640"></video>
+<!-- GitHub strips relative paths in <video>; MP4 is hosted on the demo-assets release -->
+<p align="center">
+  <video
+    src="https://github.com/uhgall/yo_pull/releases/download/demo-assets/3sperms.mp4"
+    poster="3sperms.gif"
+    controls
+    muted
+    playsinline
+    width="640">
+    <img src="3sperms.gif" alt="Sample recording — three sperm visible" width="640">
+  </video>
+  <br>
+  <sub><a href="3sperms.mp4">Full clip in repo (MP4)</a></sub>
+</p>
 
 [My semen is so bad that I had to search a bit on the slide... You can pull it out a little bit which obviously shifts the field of view. That part of the video was sped up... the 3 swimmers you can actually see at the end are what it looked like in real time, for my not-so-great material]
 
