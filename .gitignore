@@ -1,0 +1,21 @@
+# Recordings and edits
+*.mp4
+*.mov
+*.mkv
+*.llc
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+
+# macOS
+.DS_Store
+
+# Editor / IDE
+.idea/
+.vscode/
