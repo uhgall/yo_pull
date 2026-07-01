@@ -8,22 +8,35 @@ Useful for rapid at-home testing to try different collection or processing metho
 
 ## Sample recording
 
-Three sperm visible in an ~8 s clip from the live feed:
+Three sperm visible in an ~8 s clip from the live feed (GIF preview of the last few seconds):
 
-<!-- GitHub strips relative paths in <video>; MP4 is hosted on the demo-assets release -->
-<p align="center">
-  <video
-    src="https://github.com/uhgall/yo_pull/releases/download/demo-assets/3sperms.mp4"
-    poster="3sperms.gif"
-    controls
-    muted
-    playsinline
-    width="640">
-    <img src="3sperms.gif" alt="Sample recording — three sperm visible" width="640">
-  </video>
-  <br>
-  <sub><a href="3sperms.mp4">Full clip in repo (MP4)</a></sub>
-</p>
+![Sample recording — three sperm visible](3sperms.gif)
+
+[Full clip (MP4)](https://github.com/uhgall/yo_pull/releases/download/demo-assets/3sperms.mp4)
+
+```bash
+# first time
+gh release create demo-assets 3sperms.mp4 --title "Demo assets" --notes "README sample video"
+
+# replace the file later
+gh release upload demo-assets 3sperms.mp4 --clobber
+```
+
+**Option B — GitHub website:**
+
+1. Open https://github.com/uhgall/yo_pull/releases
+2. Click **Draft a new release** (or edit the existing **Demo assets** release)
+3. Tag: `demo-assets`
+4. Drag `3sperms.mp4` into **Attach binaries by dropping them here**
+5. Click **Publish release**
+
+After replacing the MP4, regenerate the GIF preview:
+
+```bash
+ffmpeg -sseof -5 -i 3sperms.mp4 -vf "fps=6,scale=400:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=96[p];[s1][p]paletteuse" -loop 0 3sperms.gif
+```
+
+Commit and push `3sperms.gif` so the README preview updates.
 
 [My semen is so bad that I had to search a bit on the slide... You can pull it out a little bit which obviously shifts the field of view. That part of the video was sped up... the 3 swimmers you can actually see at the end are what it looked like in real time, for my not-so-great material]
 
