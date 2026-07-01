@@ -1,8 +1,10 @@
 # Recordings and edits
 *.mp4
-*.mov
+!3sperms.mp4
 *.mkv
 *.llc
+
+mp4/
 
 # Python
 __pycache__/

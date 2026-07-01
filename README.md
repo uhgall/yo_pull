@@ -4,15 +4,26 @@ Tools to view and record live video from a **YO v2.0** home sperm-test device on
 
 The camera looks through a counting slide; either the original or you can make one yourself (see below). Recordings can be used to visually inspect sperm and estimate concentration from manual counts.
 
+Useful for rapid at-home testing to try different collection or processing methods or whatever else you want to experiment with. The Yo! app is annoying; it makes you wait for 10 minutes and click dozens of times, this tool avoids that.
+
+## Sample recording
+
+Three sperm visible in an ~8 s clip from the live feed:
+
+<video src="3sperms.mp4" controls width="640"></video>
+
+[My semen is so bad that I had to search a bit on the slide... You can pull it out a little bit which obviously shifts the field of view. That part of the video was sped up... the 3 swimmers you can actually see at the end are what it looked like in real time, for my not-so-great material]
+
 ## Quick start
 
-1. Power on the YO device and join its **Yo2** WiFi network on your Mac.
-2. Install ffmpeg: `brew install ffmpeg`
+1. Install ffmpeg: `brew install ffmpeg`
+2. Power on the YO device and join its **Yo2** WiFi network on your Mac.
 3. View and record live video:
 
 ```bash
 python3 yo_view.py
 ```
+With no slide inserted, you'll see a black screen because the built-in light only gets activated when you push in a slide.
 
 4. Pull saved clips off the device (not actually very useful tbh):
 
@@ -25,7 +36,7 @@ Press `q` in the viewer window to stop recording. Output defaults to `./yo_live_
 
 ## Scale
 
-Calibrated from a reference image:
+Calibrated from a reference image (the 0.2mm grid netting we use at www.cocovivo.com to keep the no-see-ums out, that's all I had, haha).
 
 - **400 pixels = 0.2 mm**
 
@@ -34,7 +45,7 @@ Calibrated from a reference image:
 | µm per pixel | **0.5 µm/px** |
 | px per mm | **2000 px/mm** |
 
-At the typical **640×480** video size, the full field of view is about:
+So with the **640×480** video size, the full field of view is about:
 
 - width: **0.32 mm** (640 px)
 - height: **0.24 mm** (480 px)
@@ -42,7 +53,9 @@ At the typical **640×480** video size, the full field of view is about:
 
 ### Slide gap
 
-We assume the original YO slide has a **0.1 mm** sample gap (chamber depth). This has been assumed and only vaguely validated — treat concentration estimates as rough. A DIY slide using **80 gsm paper** as the spacer hits roughly the same depth (see [Making your own slide](#making-your-own-slide)).
+I think the original YO slide has a **0.1 mm** sample gap (chamber depth). I vaguely validated it and it's also the medical standard (Makler chamber so I think that's right. A DIY slide using **80 gsm paper** as the spacer hits roughly the same depth (see [Making your own slide](#making-your-own-slide)).
+
+With that, you get the sperm count per mL by conting the sperm in the frame and dividing by about 8. (7.7, actually)
 
 ### 1. How big should a sperm look?
 
@@ -69,8 +82,6 @@ M sperm/mL = N / (A × d × 1000)
            = N / (A × 100)
 ```
 
-### Full frame (640×480)
-
 Using the whole visible field (`A = 0.0768 mm²`, `d = 0.1 mm`):
 
 ```
@@ -81,21 +92,17 @@ Example: **40 sperm** in the full frame → about **5.2 M/mL**.
 
 ### Typical reference range
 
-Normal semen is often quoted around **15–200 M/mL**, with many fertile samples in the **40–80 M/mL** range. Use that to sanity-check manual counts.
+Normal semen is often quoted around **15–200 M/mL**, with many fertile samples in the **40–80 M/mL** range.
 
 ## Making your own slide
 
-The YO device is just a microscope over a thin sample chamber. The original slide is a precision spacer; you can approximate one with a standard microscope slide, a cover glass, and paper for spacing.
+The YO device is just a microscope over a thin sample chamber. The original slide is a precision spacer; you can approximate one with a standard microscope slide, a cover glass, and something inbetween for the spacing.
 
 ### Gap spacer: 80 g/m² paper
 
-Normal **80 g/m²** (80 gsm) copy paper is about **0.1 mm** thick — close enough to the original slide gap to use the concentration formulas above without changing `d`.
+Normal **80 g/m²** (80 gsm) copy paper is about **0.1 mm** thick — close enough to the original slide gap to use the concentration formulas above. But it absorbs liquids, obviously, so that's a downside.
 
-Cut paper strip(s) to the width of your chamber. The paper sets the depth; the sample sits in the gap between the slide and cover glass.
-
-### Tape thickness reference
-
-If you experiment with tape as a spacer instead of paper, typical thicknesses are:
+Other spacer options:
 
 | Material | Typical thickness |
 |---|---|
@@ -107,23 +114,13 @@ If you experiment with tape as a spacer instead of paper, typical thicknesses ar
 
 80 gsm paper (~0.1 mm) sits in the middle of this range and is a good default. Thinner tape gives a shallower chamber and may focus better but shifts your concentration math; thicker tape blurs more and also changes `d` — plug the actual thickness into `M sperm/mL = N / (A × d × 1000)`.
 
-### Basic build
-
-1. **Bottom** — standard **microscope slide** (75 × 25 mm).
-2. **Spacer** — 80 gsm paper strip(s) taped along the edges (or two parallel strips) to create a shallow channel in the middle.
-3. **Sample** — a small drop of semen in the channel. Keep it thin; you want a single layer, not a pool.
-4. **Top** — standard **cover glass** laid on the spacers, pressing gently so the gap is even.
-
-Tape the stack at the edges so it does not slide apart when you insert it into the device.
-
 ### Tips
 
-- **Match the original slide footprint** if you can — trim so the stack sits flat in the YO holder and the camera looks through the centre of the channel.
+- **Match the original slide geometry** as much as possible. Obviously you need to make sure the sample is in the same spot as on the original slide. Also, the light inside the microscope is activated by pushing in the slide, so make sure it actually activates.
 - **Thicker gap = worse focus.** The camera has limited depth of field; a gap much above ~0.1 mm will look soft and sperm will be harder to see and count. Stick to one sheet of 80 gsm paper.
 - **Avoid bubbles** under the cover glass — they dominate the image and ruin counts.
-- **One paper thickness = one gap.** Stacking two sheets ≈ 0.2 mm and will throw off concentration by ~2× as well as blur the image further.
 
-This is a rough substitute, not a clinical-grade chamber. Use it for visual inspection and ballpark counts, not diagnosis.
+This is a rough substitute, not a clinical-grade chamber (no shit!).
 
 ## Files
 
@@ -149,3 +146,7 @@ ffmpeg -ss 00:00:05 -to 00:00:20 -i yo_live_20260621_002523.mp4 -c copy cropped.
 ## TODO
 
 Obviously the counting an evaluating should be done by AI these days.
+
+Should get a proper slide with a marked fine grid to get a more accurate formula. 
+
+Find a source for the sample slides, they're annoying to fabricate. 
