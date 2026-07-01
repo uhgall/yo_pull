@@ -1,6 +1,6 @@
 # yo_pull
 
-Tools to view and record live video from a **YO v2.0** home sperm-test device on a Mac.
+Tool to view and record live video from a **YO v2.0** home sperm-test device on a Mac.
 
 The camera looks through a counting slide; either the original or you can make one yourself (see below). Recordings can be used to visually inspect sperm and estimate concentration from manual counts.
 
@@ -8,35 +8,7 @@ Useful for rapid at-home testing to try different collection or processing metho
 
 ## Sample recording
 
-Three sperm visible in an ~8 s clip from the live feed (GIF preview of the last few seconds):
-
-![Sample recording — three sperm visible](3sperms.gif)
-
-[Full clip (MP4)](https://github.com/uhgall/yo_pull/releases/download/demo-assets/3sperms.mp4)
-
-```bash
-# first time
-gh release create demo-assets 3sperms.mp4 --title "Demo assets" --notes "README sample video"
-
-# replace the file later
-gh release upload demo-assets 3sperms.mp4 --clobber
-```
-
-**Option B — GitHub website:**
-
-1. Open https://github.com/uhgall/yo_pull/releases
-2. Click **Draft a new release** (or edit the existing **Demo assets** release)
-3. Tag: `demo-assets`
-4. Drag `3sperms.mp4` into **Attach binaries by dropping them here**
-5. Click **Publish release**
-
-After replacing the MP4, regenerate the GIF preview:
-
-```bash
-ffmpeg -sseof -5 -i 3sperms.mp4 -vf "fps=6,scale=400:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=96[p];[s1][p]paletteuse" -loop 0 3sperms.gif
-```
-
-Commit and push `3sperms.gif` so the README preview updates.
+Three sperm visible in an ~8 s clip from the live feed in 3sperms.mp4
 
 [My semen is so bad that I had to search a bit on the slide... You can pull it out a little bit which obviously shifts the field of view. That part of the video was sped up... the 3 swimmers you can actually see at the end are what it looked like in real time, for my not-so-great material]
 
@@ -44,22 +16,16 @@ Commit and push `3sperms.gif` so the README preview updates.
 
 1. Install ffmpeg: `brew install ffmpeg`
 2. Power on the YO device and join its **Yo2** WiFi network on your Mac.
-3. View and record live video:
+3. Live view and record live video:
 
 ```bash
 python3 yo_view.py
 ```
 With no slide inserted, you'll see a black screen because the built-in light only gets activated when you push in a slide.
 
-4. Pull saved clips off the device (not actually very useful tbh):
+The video is also stored in an mp4 file in the same directory, named with time stamp the clip was taken.
 
-```bash
-python3 yo_pull.py setup
-python3 yo_pull.py ftp-grab --out ~/Desktop/yo_videos
-```
-
-Press `q` in the viewer window to stop recording. Output defaults to `./yo_live_<timestamp>.mp4`.
-
+Count the sperm you see in the frame and divide by 8 to get the concentration in sperm/mL.
 ## Scale
 
 Calibrated from a reference image (the 0.2mm grid netting we use at www.cocovivo.com to keep the no-see-ums out, that's all I had, haha).
@@ -83,7 +49,7 @@ I think the original YO slide has a **0.1 mm** sample gap (chamber depth). I vag
 
 With that, you get the sperm count per mL by conting the sperm in the frame and dividing by about 8. (7.7, actually)
 
-### 1. How big should a sperm look?
+### How big should a sperm look?
 
 | Part | Real size | Expected size in video |
 |---|---|---|
@@ -97,7 +63,7 @@ In a 640 px-wide frame:
 - A full motile sperm with tail can span up to **~15–20% of frame width**.
 - Objects much wider than **~15 px** are probably debris, bubbles, or clumps, not individual heads.
 
-## 2. Converting a slide count to M sperm/mL
+## Converting a slide count to M sperm/mL
 
 **M sperm/mL** means **millions of sperm per millilitre** (same unit the YO app reports).
 
@@ -147,14 +113,6 @@ Other spacer options:
 - **Avoid bubbles** under the cover glass — they dominate the image and ruin counts.
 
 This is a rough substitute, not a clinical-grade chamber (no shit!).
-
-## Files
-
-| File | Purpose |
-|---|---|
-| `yo_view.py` | Live view + record from RTSP |
-| `yo_pull.py` | Download clips from device (HTTP/FTP/API) |
-
 ## Trimming recordings
 
 LosslessCut is the easiest GUI option for time-cropping MP4s on macOS:
