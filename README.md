@@ -6,11 +6,11 @@ The camera looks through a counting slide; either the original or you can make o
 
 Useful for rapid at-home testing to try different collection or processing methods, split-sample evaluation or whatever else you want to experiment with. The Yo! app is annoying; it makes you wait for 10 minutes and click dozens of times, this tool avoids that.
 
-## A few things I learnt about the Yo! test
+## The original Yo! test only works for motile sperm!
 
-Turns out it can really only detect motile sperm. It still gives a count for total (immotile sperm), but it's highly inaccurate. When I tested the same slide multiple times, with motility < 1%, I got the following results for total concentration in M/mL: 17.8, 4.1, 5.7, 10.1, 13.5, 8.9, 29.7. So - not exactly meaningful. 
+Turns out their app can really only detect motile sperm. It gives a count for total (including immotile sperm), but it's highly inaccurate. When I tested the same slide multiple times, with motility < 1%, I got the following results for total concentration in M/mL: 17.8, 4.1, 5.7, 10.1, 13.5, 8.9, 29.7. So - not exactly meaningful. 
 
-Background on this is here: 
+More detail on this at the end of the README.
 
 ## Sample recording
 
@@ -138,6 +138,18 @@ Or with ffmpeg:
 ```bash
 ffmpeg -ss 00:00:05 -to 00:00:20 -i yo_live_20260621_002523.mp4 -c copy cropped.mp4
 ```
+
+## Yo! Test Limitations
+
+sez perplexity: 
+
+Screening tool, not a diagnostic. Cleared only as a binary "above/below ~6 M/mL" motile-sperm screen; it does not evaluate morphology, DNA fragmentation, volume, or pH. FDA K241628: https://www.accessdata.fda.gov/cdrh_docs/pdf24/K241628.pdf
+
+Poor precision, worst at low counts. Manufacturer's own FDA data show same-device/same-operator variance up to 20.8–23.2% CV, blamed on "sample instability/artifact." Near the cutoff, one sample read LOW 62.5% / NORMAL 37.5% of the time. FDA K161493: https://www.accessdata.fda.gov/cdrh_docs/reviews/K161493.pdf
+
+Total/non-motile count is inferred, not reliably measured. The device's real signal is motion; total concentration depends on a fragile still-frame detection of non-moving sperm-shaped objects, which are hard to distinguish from debris. This is why a static slide can read 5→16 M/mL. FDA K241628 review: https://www.accessdata.fda.gov/cdrh_docs/reviews/K241628.pdf
+
+Widely reported real-world variance. Users report multi-fold swings (e.g., 5.8→6.9→10.3 M/mL, 0%→68% motility) on the same sample, and low motility on visibly-swimming samples. Reddit: https://www.reddit.com/r/maleinfertility/comments/1jrvk2s/is_yo_sperm_test_accurate/mlhshif/
 
 ## TODO
 
