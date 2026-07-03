@@ -4,11 +4,21 @@ Tool to view and record live video from a **YO v2.0** home sperm-test device on 
 
 The camera looks through a counting slide; either the original or you can make one yourself (see below). Recordings can be used to visually inspect sperm and estimate concentration from manual counts.
 
-Useful for rapid at-home testing to try different collection or processing methods or whatever else you want to experiment with. The Yo! app is annoying; it makes you wait for 10 minutes and click dozens of times, this tool avoids that.
+Useful for rapid at-home testing to try different collection or processing methods, split-sample evaluation or whatever else you want to experiment with. The Yo! app is annoying; it makes you wait for 10 minutes and click dozens of times, this tool avoids that.
+
+## A few things I learnt about the Yo! test
+
+Turns out it can really only detect motile sperm. It still gives a count for total (immotile sperm), but it's highly inaccurate. When I tested the same slide multiple times, with motility < 1%, I got the following results for total concentration in M/mL: 17.8, 4.1, 5.7, 10.1, 13.5, 8.9, 29.7. So - not exactly meaningful. 
+
+Background on this is here: 
 
 ## Sample recording
 
-Three sperm visible in an ~8 s clip from the live feed in 3sperms.mp4
+Three motile sperm visible in an ~8 s clip from the live feed:
+
+![Sample recording — three sperm visible](3sperms.gif)
+
+[Full clip (MP4)](https://github.com/uhgall/yo_pull/releases/download/demo-assets/3sperms.mp4)
 
 [My semen is so bad that I had to search a bit on the slide... You can pull it out a little bit which obviously shifts the field of view. That part of the video was sped up... the 3 swimmers you can actually see at the end are what it looked like in real time, for my not-so-great material]
 
@@ -26,9 +36,9 @@ With no slide inserted, you'll see a black screen because the built-in light onl
 The video is also stored in an mp4 file in the same directory, named with time stamp the clip was taken.
 
 Count the sperm you see in the frame and divide by 8 to get the concentration in sperm/mL.
-## Scale
+## Sperm count arithmetic
 
-Calibrated from a reference image (the 0.2mm grid netting we use at www.cocovivo.com to keep the no-see-ums out, that's all I had, haha).
+The video is 640x480px. Calibrated from a reference image (the 0.2mm grid netting we use at www.cocovivo.com to keep the no-see-ums out, that's all I had, haha).
 
 - **400 pixels = 0.2 mm**
 
@@ -47,7 +57,7 @@ So with the **640×480** video size, the full field of view is about:
 
 I think the original YO slide has a **0.1 mm** sample gap (chamber depth). I vaguely validated it and it's also the medical standard (Makler chamber so I think that's right. A DIY slide using **80 gsm paper** as the spacer hits roughly the same depth (see [Making your own slide](#making-your-own-slide)).
 
-With that, you get the sperm count per mL by conting the sperm in the frame and dividing by about 8. (7.7, actually)
+With that, you get the sperm count per mL by counting the sperm in the frame and dividing by about 8. (7.7, actually)
 
 ### How big should a sperm look?
 
@@ -82,15 +92,17 @@ M sperm/mL ≈ N / 7.7
 
 Example: **40 sperm** in the full frame → about **5.2 M/mL**.
 
-### Typical reference range
+## Cleaning the slide so you can reuse it
 
-Normal semen is often quoted around **15–200 M/mL**, with many fertile samples in the **40–80 M/mL** range.
+Washing it out with water seems to work ok - I had best results by angling a kitchen sink sprayer against the red dot so that some of the water pushes under the slide cover. Then blow out the water with compressed air with a tiny nozzle - comes out in a few seconds.
+
+But it's not perfect - alternative is to make your own slide. Which may or may not work better.
 
 ## Making your own slide
 
 The YO device is just a microscope over a thin sample chamber. The original slide is a precision spacer; you can approximate one with a standard microscope slide, a cover glass, and something inbetween for the spacing.
 
-### Gap spacer: 80 g/m² paper
+### Gap spacer
 
 Normal **80 g/m²** (80 gsm) copy paper is about **0.1 mm** thick — close enough to the original slide gap to use the concentration formulas above. But it absorbs liquids, obviously, so that's a downside.
 
@@ -104,7 +116,7 @@ Other spacer options:
 | Good-quality electrical tape, e.g. 3M Super 33+ class | ~0.18 mm |
 | Cheap thin electrical tape | ~0.10–0.13 mm |
 
-80 gsm paper (~0.1 mm) sits in the middle of this range and is a good default. Thinner tape gives a shallower chamber and may focus better but shifts your concentration math; thicker tape blurs more and also changes `d` — plug the actual thickness into `M sperm/mL = N / (A × d × 1000)`.
+Thinner tape gives a shallower chamber and may focus better but shifts your concentration math; thicker tape blurs more and also changes `d` — plug the actual thickness into `M sperm/mL = N / (A × d × 1000)`.
 
 ### Tips
 
@@ -131,6 +143,6 @@ ffmpeg -ss 00:00:05 -to 00:00:20 -i yo_live_20260621_002523.mp4 -c copy cropped.
 
 Obviously the counting an evaluating should be done by AI these days.
 
-Should get a proper slide with a marked fine grid to get a more accurate formula. 
+Should get a scale slide with a fine grid to get a more accurate formula. 
 
-Find a source for the sample slides, they're annoying to fabricate. 
+Find a source for the sample slides, they're annoying to fabricate.
