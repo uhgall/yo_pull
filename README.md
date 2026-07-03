@@ -2,13 +2,12 @@
 
 Tool to view and record live video from a **YO v2.0** home sperm-test device on a Mac.
 
-The camera looks through a counting slide; either the original or you can make one yourself (see below). Recordings can be used to visually inspect sperm and estimate concentration from manual counts.
+The camera in the Yo device looks through a counting slide; either the original or you can make one yourself (see below). Recordings can be used to visually inspect sperm and estimate concentration from manual counts.
 
-Useful for rapid at-home testing to try different collection or processing methods, split-sample evaluation or whatever else you want to experiment with. The Yo! app is annoying; it makes you wait for 10 minutes and click dozens of times, this tool avoids that.
+Useful for rapid at-home testing to try different collection or processing methods, split-sample evaluation or whatever else you want to experiment with. 
 
-## The original Yo! test only works for motile sperm!
-
-Turns out their app can really only detect motile sperm. It gives a count for total (including immotile sperm), but it's highly inaccurate. When I tested the same slide multiple times, with motility < 1%, I got the following results for total concentration in M/mL: 17.8, 4.1, 5.7, 10.1, 13.5, 8.9, 29.7. So - not exactly meaningful. 
+The Yo! app is annoying; it makes you wait for 10 minutes and click dozens of times, this tool avoids that.
+Also, the Yo app can really only detect motile sperm. It gives a count for total (including immotile sperm), but that's highly inaccurate. When I tested the same slide multiple times, with motility < 1%, I got the following results for total concentration in M/mL: 17.8, 4.1, 5.7, 10.1, 13.5, 8.9, 29.7. So - not exactly meaningful. 
 
 More detail on this at the end of the README.
 
